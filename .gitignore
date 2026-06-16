@@ -4,3 +4,4 @@ CLAUDE.md
 visualization/
 *.log
 *.csv
+outputs/*
