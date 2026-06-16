@@ -50,10 +50,25 @@ def summarize_replications(
 def run_experiment() -> pd.DataFrame:
     rows: list[dict[str, float | int | str]] = []
     for scenario_name, scenario in SCENARIOS.items():
-        replication_metrics = [
-            run_replication(scenario=scenario, seed=seed)
-            for seed in REPLICATION_SEEDS
-        ]
+        replication_metrics = []
+        for seed in REPLICATION_SEEDS:
+            metric = run_replication(
+                scenario=scenario,
+                seed=seed,
+            )
+
+            print(
+                scenario_name,
+                seed,
+                metric.average_bp_waiting_time,
+                metric.average_general_waiting_time,
+                metric.average_bp_queue_length,
+                metric.average_general_queue_length,
+                metric.patients_completed,
+            )
+
+            replication_metrics.append(metric)
+        
         rows.append(summarize_replications(scenario_name, replication_metrics))
 
     results_df = pd.DataFrame(
@@ -70,5 +85,5 @@ def run_experiment() -> pd.DataFrame:
 
     OUTPUT_DATA_PATH.parent.mkdir(parents = True, exist_ok = True)
     results_df.to_csv(OUTPUT_DATA_PATH, index = False)
-
+    
     return results_df

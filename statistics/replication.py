@@ -12,7 +12,7 @@ from models.routes import ROUTES
 from statistics.metrics import SimulationMetrics
 
 # Simulation parameters
-PATIENT_COUNT = 200
+PATIENT_COUNT = 1000
 SIMULATION_TIME = 120
 MIN_ARRIVAL_INTERVAL = 0
 MAX_ARRIVAL_INTERVAL = 2
@@ -50,7 +50,7 @@ def generate_patient_arrivals(
     metrics: SimulationMetrics
 ) -> Generator[simpy.events.Event, None, None]:
     for patient_id in range(1, patient_count + 1):
-        arrival_interval = np.random.exponential(scale = 0.8)
+        arrival_interval = np.random.exponential(scale = 0.25)
         yield env.timeout(arrival_interval)
 
         patient = generate_patient(patient_id = patient_id, arrival_time = env.now)
@@ -70,5 +70,5 @@ def run_replication(scenario: dict[str, int], seed: int) -> SimulationMetrics:
 
     env.process(generate_patient_arrivals(env, clinic, PATIENT_COUNT, metrics))
     env.run(until = SIMULATION_TIME)
-
+    
     return metrics
