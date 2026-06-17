@@ -13,7 +13,7 @@ from statistics.metrics import SimulationMetrics
 
 # Simulation parameters
 PATIENT_COUNT = 1000
-SIMULATION_TIME = 120
+SIMULATION_TIME = 480
 MIN_ARRIVAL_INTERVAL = 0
 MAX_ARRIVAL_INTERVAL = 2
 
@@ -50,7 +50,7 @@ def generate_patient_arrivals(
     metrics: SimulationMetrics
 ) -> Generator[simpy.events.Event, None, None]:
     for patient_id in range(1, patient_count + 1):
-        arrival_interval = np.random.exponential(scale = 0.25)
+        arrival_interval = np.random.exponential(scale = 1.2)
         yield env.timeout(arrival_interval)
 
         patient = generate_patient(patient_id = patient_id, arrival_time = env.now)
