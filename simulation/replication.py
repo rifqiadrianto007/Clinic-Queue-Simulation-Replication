@@ -9,7 +9,7 @@ from data.service_times import get_service_time
 from models.clinic import ClinicResources
 from models.patient import Patient
 from models.routes import ROUTES
-from statistics.metrics import SimulationMetrics
+from simulation.metrics import SimulationMetrics
 
 # Simulation parameters
 PATIENT_COUNT = 1000

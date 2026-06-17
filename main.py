@@ -1,5 +1,5 @@
 from __future__ import annotations
-from statistics.experiment import run_experiment
+from simulation.experiment import run_experiment
 from visualization.plots import generate_all_plots
 
 def main() -> None:

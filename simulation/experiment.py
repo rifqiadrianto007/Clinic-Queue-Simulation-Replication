@@ -3,8 +3,8 @@ from pathlib import Path
 import pandas as pd
 
 from scenarios.config import INITIAL, SCENARIO_1, SCENARIO_2, SCENARIO_3
-from statistics.metrics import SimulationMetrics
-from statistics.replication import run_replication
+from simulation.metrics import SimulationMetrics
+from simulation.replication import run_replication
 
 REPLICATION_SEEDS = (100, 101, 102, 103, 104)
 OUTPUT_DATA_PATH = Path("outputs") / "data" / "experiment_results.csv"
